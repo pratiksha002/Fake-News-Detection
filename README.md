@@ -77,13 +77,11 @@ Multiple algorithms were trained and tested to compare their performance:
 ---
 
 ## 📊 Model Comparison (Accuracy)
-
-         Model	      Accuracy
-0	Logistic Regression	0.994342
-1	Linear SVM	        0.998642
-2	Decision Tree	      0.996379
-3	Random Forest	      0.997171
-4	Ridge Classifier	  0.998642
+Logistic Regression-0.994342
+Linear SVM-0.998642
+Decision Tree-0.996379
+Random Forest-0.997171
+Ridge Classifier-0.998642
 
 ---
 
