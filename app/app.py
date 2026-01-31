@@ -1,49 +1,25 @@
 import streamlit as st
-import joblib
 import re
 import string
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
-
-# Load model + vectorizer
-import os
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-import os
-import joblib
-import streamlit as st
-import re
-import string
-from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
+import sys
 
 # Always load paths relative to this file
 import os
 import joblib
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(BASE_DIR, ".."))
 
+from src.preprocessing import clean_text
 MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "fake_news_model.pkl")
 VEC_PATH   = os.path.join(BASE_DIR, "..", "models", "tfidf_vectorizer.pkl")
+from src.utils import load_model_and_vectorizer
 
+model, vectorizer = load_model_and_vectorizer()
 model = joblib.load(MODEL_PATH)
 vectorizer = joblib.load(VEC_PATH)
-
-
-model = joblib.load(MODEL_PATH)
-vectorizer = joblib.load(VEC_PATH)
-
-
-
 stop_words = set(ENGLISH_STOP_WORDS)
-
-def clean_text(text):
-    text = str(text).lower()
-    text = re.sub(r"http\S+|www\S+|https\S+", "", text)
-    text = re.sub(r"\d+", "", text)
-    text = text.translate(str.maketrans("", "", string.punctuation))
-    text = re.sub(r"\s+", " ", text).strip()
-    text = " ".join([w for w in text.split() if w not in stop_words])
-    return text
 
 def predict_news(news_text):
     cleaned = clean_text(news_text)
