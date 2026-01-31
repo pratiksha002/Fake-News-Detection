@@ -3,8 +3,6 @@ import re
 import string
 from sklearn.feature_extraction.text import ENGLISH_STOP_WORDS
 import sys
-
-# Always load paths relative to this file
 import os
 import joblib
 
@@ -22,6 +20,9 @@ vectorizer = joblib.load(VEC_PATH)
 stop_words = set(ENGLISH_STOP_WORDS)
 
 def predict_news(news_text):
+    if len(news_text.split()) < 80:
+        st.warning("⚠️ Please enter at least 80 words for better prediction.")
+        st.stop()
     cleaned = clean_text(news_text)
     vec = vectorizer.transform([cleaned])
     pred = model.predict(vec)[0]
