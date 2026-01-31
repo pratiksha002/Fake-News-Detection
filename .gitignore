@@ -1,8 +1,6 @@
+data/
+*.csv
+*.pkl
+*.joblib
 venv/
-Lib/
-site-packages/
 __pycache__/
-.ipynb_checkpoints/
-.DS_Store
-
-outputs/
